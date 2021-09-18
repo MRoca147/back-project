@@ -19,7 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function(){
-    Route::post('logout', 'AuthController@logout');
+    Route::get('logout', 'AuthController@logout');
+
+    Route::apiResource('activities', 'ActivityController');
+
+    Route::get('completed/{id}', 'TaskController@completedTask');
+    Route::apiResource('tasks', 'TaskController');
 });
 
 Route::post('register', 'AuthController@register');
