@@ -1,4 +1,6 @@
-#Instrucciones
+##Instrucciones
+
+Projecto en Laravel 8
 
 1. Ejecutar composer install
 2. Generar .env (copiar el .env.example)
