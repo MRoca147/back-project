@@ -18,11 +18,15 @@ php artisan key:generate
  - create database todo_list
 
 6. Dentro del archivo .env colocar DB_DATABASE=todo_list
-8. ejecutar el siguiente comando para guardar los archivos
+7. Correr migraciones
+```
+php artisan migrate
+```
+9. Ejecutar el siguiente comando para guardar los archivos
 ```
 php artisan storage:link
 ```
-8. ejecutar
+9. Ejecutar
 ```
 php artisan serve
 ```
