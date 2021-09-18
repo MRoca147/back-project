@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->foreignId('activity_id')->references('id')->on('activities')->onDelete('cascade');
             $table->text('description', 255);
             $table->text('file')->nullable();
-            $table->integer('completed')->default(0);
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

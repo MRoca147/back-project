@@ -25,8 +25,8 @@ class TaskRequest extends FormRequest
     {
         return [
             'activity_id' => 'required',
-            'description' => 'min:3|max:255',
-            'file' => 'nullable|file'
+            'description' => 'required|min:3|max:255',
+            'upload_file' => 'nullable|image'
         ];
     }
 }

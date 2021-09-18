@@ -23,7 +23,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::apiResource('activities', 'ActivityController');
 
-    Route::get('completed/{id}', 'TaskController@completedTask');
+    Route::get('tasks/completed/{id}', 'TaskController@completedTask');
     Route::apiResource('tasks', 'TaskController');
 });
 

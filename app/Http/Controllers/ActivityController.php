@@ -39,7 +39,7 @@ class ActivityController extends Controller
     {
         $request->merge(['user_id' => auth('sanctum')->user()->id]);
         $activity = Activity::create($request->all());
-        return $this->response_success($activity);
+        return $this->response_success($activity->load('tasks'));
     }
 
     /**

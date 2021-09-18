@@ -18,6 +18,8 @@ class CreateActivitiesTable extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('title', 500);
             $table->text('description')->nullable();
+            $table->boolean('completed')->default(false);
+            $table->date('completed_at')->nullable();
             $table->timestamps();
         });
     }

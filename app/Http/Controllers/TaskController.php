@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ActivityRequest;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -112,12 +113,32 @@ class TaskController extends Controller
 
     public function completedTask($id)
     {
-        $task = Task::find($id);
-        if($task->completed == 0){
-            $task->update(['completed' => 1]);
+        $task = Task::with('activity')->find($id);
+        if($task->completed == false){
+            $task->update(['completed' => true]);
+            $this->verifyActivity($task);
         }else{
-            $task->update(['completed' => 0]);
+            $task->update(['completed' => false]);
+            $this->verifyActivity($task);
         }
+        $task = Task::with('activity.tasks')->find($id);
         return $this->response_success($task);
+    }
+
+    public function verifyActivity($task)
+    {
+        $activity = Activity::with('tasks')->find($task->activity->id);
+        $count = count($activity->tasks);
+        $completed = 0;
+        foreach($activity->tasks as $item){
+            if($item->completed == 1){
+                $completed++;
+            }
+        }
+        if($completed == $count){
+            $activity->update(['completed' => 1, 'completed_at' => today()]);
+        }else{
+            $activity->update(['completed' => 0, 'completed_at' => null]);
+        }
     }
 }
